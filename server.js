@@ -4,6 +4,7 @@ import cors from "cors";
 import morgan from "morgan";
 
 import { connectDB } from "./config/database.js";
+import { notFound, errorHandler } from "./middleware/error.middleware.js";
 
 const app = express();
 
@@ -30,6 +31,12 @@ if (process.env.NODE_ENV !== "production") app.use(morgan("dev"));
 app.get("/api", (req, res) =>
   res.json({ success: true, status: "ok", service: "CRM API" })
 );
+
+/* ----------------------------- Error handling (last) ----------------------------- */
+// This middleware should be the last one registered to catch any unmatched routes.
+app.use(notFound);
+// This middleware should be the last one registered to handle any errors that occur.
+app.use(errorHandler);
 
 /* ----------------------------- Boot ----------------------------- */
 // Use the port from the environment when deployed; otherwise use port 8000 locally.
