@@ -3,11 +3,14 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 
+import authRoutes from "./routes/auth.routes.js";
+
 import { connectDB } from "./config/database.js";
 import { notFound, errorHandler } from "./middleware/error.middleware.js";
 
 const app = express();
 
+/* ----------------------------- Middleware ----------------------------- */
 // Allow the front-end to call this API from another origin, such as localhost:5173.
 // `credentials: true` allows cookies or other browser credentials to be included.
 app.use(
@@ -27,10 +30,13 @@ app.use(express.urlencoded({ extended: true }));
 // Morgan logs HTTP requests during development, which helps with debugging.
 if (process.env.NODE_ENV !== "production") app.use(morgan("dev"));
 
+/* ----------------------------- Routes ----------------------------- */
 // A small health-check endpoint confirms that the API process is responding.
 app.get("/api", (req, res) =>
   res.json({ success: true, status: "ok", service: "CRM API" })
 );
+
+app.use("/api/auth", authRoutes);
 
 /* ----------------------------- Error handling (last) ----------------------------- */
 // This middleware should be the last one registered to catch any unmatched routes.
