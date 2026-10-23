@@ -6,6 +6,7 @@ import morgan from "morgan";
 import authRoutes from "./routes/auth.routes.js";
 import contactRoutes from "./routes/contact.routes.js";
 import noteRoutes from "./routes/note.routes.js";
+import leadRoutes from "./routes/lead.routes.js";
 
 import { connectDB } from "./config/database.js";
 import { notFound, errorHandler } from "./middleware/error.middleware.js";
@@ -41,6 +42,7 @@ app.get("/api", (req, res) =>
 app.use("/api/auth", authRoutes);
 app.use("/api/contacts", contactRoutes);
 app.use("/api/notes", noteRoutes);
+app.use("/api/leads", leadRoutes);
 
 /* ----------------------------- Error handling (last) ----------------------------- */
 // This middleware should be the last one registered to catch any unmatched routes.
