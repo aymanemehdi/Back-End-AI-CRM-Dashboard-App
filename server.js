@@ -9,6 +9,7 @@ import noteRoutes from "./routes/note.routes.js";
 import leadRoutes from "./routes/lead.routes.js";
 import taskRoutes from "./routes/task.routes.js";
 import analyticsRoutes from "./routes/analytics.routes.js";
+import aiRoutes from "./routes/ai.routes.js";
 
 import { connectDB } from "./config/database.js";
 import { notFound, errorHandler } from "./middleware/error.middleware.js";
@@ -42,7 +43,7 @@ app.get("/api", (req, res) =>
 );
 
 app.use("/api/analytics", analyticsRoutes);
-
+app.use("/api/ai", aiRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/contacts", contactRoutes);
 app.use("/api/notes", noteRoutes);
