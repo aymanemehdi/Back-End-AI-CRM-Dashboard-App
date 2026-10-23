@@ -8,6 +8,7 @@ import contactRoutes from "./routes/contact.routes.js";
 import noteRoutes from "./routes/note.routes.js";
 import leadRoutes from "./routes/lead.routes.js";
 import taskRoutes from "./routes/task.routes.js";
+import analyticsRoutes from "./routes/analytics.routes.js";
 
 import { connectDB } from "./config/database.js";
 import { notFound, errorHandler } from "./middleware/error.middleware.js";
@@ -39,6 +40,8 @@ if (process.env.NODE_ENV !== "production") app.use(morgan("dev"));
 app.get("/api", (req, res) =>
   res.json({ success: true, status: "ok", service: "CRM API" })
 );
+
+app.use("/api/analytics", analyticsRoutes);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/contacts", contactRoutes);
